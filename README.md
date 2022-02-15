@@ -1,0 +1,2 @@
+# -palavriado
+Joguete de palavras
