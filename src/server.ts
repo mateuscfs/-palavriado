@@ -10,7 +10,7 @@ async function startServer() {
 
     app.listen(PORT, () => {
         // eslint-disable-next-line no-console
-        console.log(`Palavriado Aulaine`);
+        console.log(`Palavreado Aulaine`);
     });
 }
 
