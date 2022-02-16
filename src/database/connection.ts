@@ -1,8 +1,20 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import { createConnections, Connection } from 'typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 dotenv.config();
+
+export const connectionOptions: PostgresConnectionOptions = {
+    name: 'default',
+    type: 'postgres',
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT!,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    entities: [`${path.resolve(__dirname, '../database/entities')}/*.{ts,js}`],
+}
 
 export default async (isTesting = false): Promise<Connection[]> => {
     if (isTesting) {
@@ -13,7 +25,7 @@ export default async (isTesting = false): Promise<Connection[]> => {
                 database: ':memory:',
                 migrationsRun: isTesting,
                 synchronize: isTesting,
-                entities: [`${path.resolve(__dirname, '../entities')}/*.{ts,js}`],
+                entities: [`${path.resolve(__dirname, '../database/entities')}/*.{ts,js}`],
             },
         ]);
 
@@ -24,16 +36,5 @@ export default async (isTesting = false): Promise<Connection[]> => {
         return connections;
     }
 
-    return createConnections([
-        {
-            name: 'default',
-            type: 'postgres',
-            host: process.env.DB_HOST,
-            port: +process.env.DB_PORT!,
-            username: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME,
-            entities: [`${path.resolve(__dirname, '../entities')}/*.{ts,js}`],
-        },
-    ]);
+    return createConnections([ connectionOptions ]);
 };

@@ -1,4 +1,3 @@
-import * as yup from 'yup';
 import { ValidationError } from 'express-validator';
 
 export class HttpError extends Error {
@@ -28,27 +27,5 @@ export class InactivationError extends HttpError {
         this.errors = data.map(({ id, description }) => {
             return { id, description };
         });
-    }
-}
-
-export class ValidateError extends HttpError {
-    errors: { property: string | undefined; message: string | undefined }[];
-
-    constructor(error: yup.ValidationError) {
-        super(400, 'Validation Error');
-
-        this.errors = error.inner.map(err => {
-            return { property: err.path, message: err.type };
-        });
-    }
-}
-
-export class ValidatorError extends HttpError {
-    errors: ValidationError[];
-
-    constructor(errors: ValidationError[]) {
-        super(400, 'Bad Request');
-
-        this.errors = errors;
     }
 }

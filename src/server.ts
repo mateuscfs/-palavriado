@@ -6,7 +6,7 @@ import connect from './database/connection';
 const PORT = process.env.PORT || 3000;
 
 async function startServer() {
-    connect();
+    connect()
 
     app.listen(PORT, () => {
         // eslint-disable-next-line no-console
