@@ -9,23 +9,12 @@ export class HttpError extends Error {
     }
 }
 
+export class ValidatorError extends HttpError {
+    errors: ValidationError[];
 
-interface InactivationErrors {
-    id: string;
-    description: string;
-}
+    constructor(errors: ValidationError[]) {
+        super(400, 'Bad Request');
 
-export class InactivationError extends HttpError {
-    message: string;
-
-    errors: InactivationErrors[];
-
-    constructor(message: string, data: InactivationErrors[]) {
-        super(400, message);
-
-        this.message = message;
-        this.errors = data.map(({ id, description }) => {
-            return { id, description };
-        });
+        this.errors = errors;
     }
 }

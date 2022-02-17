@@ -8,7 +8,7 @@ import express, { Request, Response, NextFunction } from 'express';
 require('express-async-errors');
 
 import routes from './routes';
-import { HttpError, InactivationError } from './utils/errors';
+import { HttpError } from './utils/errors';
 
 class App {
     public app: express.Application;
@@ -32,8 +32,7 @@ class App {
     private static errorHandling(
         error:
             | Error
-            | HttpError
-            | InactivationError,
+            | HttpError,
         req: Request,
         res: Response,
         next: NextFunction,
@@ -41,11 +40,7 @@ class App {
         const { code, message, errors } = <any>error;
 
         const apiError = {
-            code:
-                <any>error instanceof HttpError ||
-                <any>error instanceof InactivationError
-                    ? code
-                    : 500,
+            code,
             message,
             errors,
         };

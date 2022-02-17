@@ -14,7 +14,7 @@ export const connectionOptions: PostgresConnectionOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: [`${path.resolve(__dirname, '../database/entities')}/*.{ts,js}`],
-}
+};
 
 export default async (isTesting = false): Promise<Connection[]> => {
     if (isTesting) {
@@ -25,7 +25,9 @@ export default async (isTesting = false): Promise<Connection[]> => {
                 database: ':memory:',
                 migrationsRun: isTesting,
                 synchronize: isTesting,
-                entities: [`${path.resolve(__dirname, '../database/entities')}/*.{ts,js}`],
+                entities: [
+                    `${path.resolve(__dirname, '../database/entities')}/*.{ts,js}`,
+                ],
             },
         ]);
 
@@ -36,5 +38,5 @@ export default async (isTesting = false): Promise<Connection[]> => {
         return connections;
     }
 
-    return createConnections([ connectionOptions ]);
+    return createConnections([connectionOptions]);
 };
