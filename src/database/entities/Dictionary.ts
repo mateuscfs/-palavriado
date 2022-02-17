@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
-@Entity("dictionary")
+@Entity('dictionary')
+@Unique(['name'])
 export class DictionaryEntity {
     @PrimaryGeneratedColumn('uuid')
     id?: string;
