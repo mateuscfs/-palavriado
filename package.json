@@ -11,6 +11,7 @@
     "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f ./src/ormconfig.ts",
     "migration:generate": "npm run typeorm:cli migration:generate -- -n",
     "migration:clean": "npm run typeorm:cli schema:drop && npm run typeorm:cli migration:run",
+    "migration:down": "npm run typeorm:cli migration:revert",
     "migration:run": "npm run typeorm:cli migration:run"
   },
   "repository": {
@@ -24,10 +25,6 @@
   },
   "homepage": "https://github.com/mateuscfs/palavreado#readme",
   "dependencies": {
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
-    "@types/node": "^17.0.18",
-    "@types/swagger-jsdoc": "^6.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -36,18 +33,22 @@
     "express-validator": "^6.4.0",
     "path": "^0.12.7",
     "pg": "^8.2.0",
-    "sqlite3": "^5.0.2",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.2.0",
     "swagger-jsdoc": "^6.1.0",
     "typeorm": "^0.2.31",
     "typescript": "^3.9.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
     "@types/node": "^14.14.31",
     "@types/pg": "^7.14.3",
+    "@types/swagger-jsdoc": "^6.0.1",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "ava": "^3.8.2",
-    "eslint": "^6.8.0",
+    "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-import-resolver-typescript": "^2.3.0",
